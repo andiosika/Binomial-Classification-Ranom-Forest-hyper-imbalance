@@ -9,9 +9,9 @@ In this lesson, we'll review all the guidelines and specifications for the final
 
 ## Objectives
 
-* Understand all required aspects of the Final Project for Module 3
-* Understand all required deliverables
-* Understand what constitutes a successful project
+- Understand all required aspects of the Final Project for Module 3
+- Understand all required deliverables
+- Understand what constitutes a successful project
 
 ## Final Project Summary
 
