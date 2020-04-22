@@ -15,26 +15,6 @@ def des(feature):
     
 #     return x
 
-def bxplt(col):
-    import matplotlib.pyplot as plt
-    import seaborn as sns
-    """Returns vizual information on
-    outliers, value counts and description
-    
-    args:
-    col - df['column'], the column name from 
-    a pd.DataFrame
-    """
-    import seaborn as sns
-    
-    y = col.value_counts()
-    z = col.describe()
-    
-    x = sns.boxplot(col)
-
-    return y, z , x
-
-
 
 ###plotting the importance of features based
 ### on decision tree model visually and with a 
@@ -88,6 +68,7 @@ def evaluate_model(X_true, y_true, y_pred, X_train, y_train, clf):
     
     report = metrics.classification_report(y_true,y_pred, output_dict=True)
     report_df = pd.DataFrame(report).transpose().round(3)
+    
     display(report_df)
 
     ###Testing Accuracy Training Accuracy
@@ -189,3 +170,24 @@ timer = Timer()
 print(timer.created_at)
 timer.start()
 timer.stop()
+
+
+
+def bxplt(col):
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    """Returns vizual information on
+    outliers, value counts and description
+    
+    args:
+    col - df['column'], the column name from 
+    a pd.DataFrame
+    """
+    import seaborn as sns
+    
+    y = col.value_counts()
+    z = col.describe()
+    
+    x = sns.boxplot(col)
+
+    return y, z , x
