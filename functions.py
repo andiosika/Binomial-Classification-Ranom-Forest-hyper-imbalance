@@ -37,13 +37,18 @@ def plot_importance(clf, X_train, top_n=20,figsize=(15,12)):
     df_import.sort_values().plot(kind='barh', figsize=(15,12))
     return df_importance
 
-def df_importance(tree, X_train, top_n=20):
+def df_import(clf, X_train, n=20):  
     import pandas as pd
 
-    df_import = pd.DataFrame(tree.feature_importances_, X_train.columns)
+    df_import = pd.DataFrame(clf.feature_importances_, X_train.columns)
     df_import.reset_index(inplace=True)
-    df_import.columns = ['feature', 'coef']
-    df_import.sort_values('coef', ascending=False).head(top_n)
+    df_import.columns = ['factor', 'coef']
+    x = df_import.sort_values('coef', ascending=False).head(n)
+    x.reset_index(drop=True,inplace=True)
+    y = x.sort_values('coef', ascending=False).head(n).style.bar(subset=['coef'], color='#d65f5f')
+    
+    return y
+    
 
 
 

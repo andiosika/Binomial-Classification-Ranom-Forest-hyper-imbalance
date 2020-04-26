@@ -1,0 +1,118 @@
+time = fn.Timer()
+time.start()
+rf_clf3 = RandomForestClassifier(criterion='gini', max_depth=4, max_features=.33, n_estimators=100, class_weight='balanced', random_state=111)
+rf_clf3.fit(X_train_res, y_train_res)
+time.stop()
+
+[i] Timer started at04/22/20 - 07:13 PM
+[i] Timer ended at 04/22/20 - 07:27 PM
+- Total time = 0:13:32.044660
+
+	precision	recall	f1-score	support
+0	0.999	0.977	0.988	143605.000
+1	0.034	0.591	0.064	198.000
+accuracy	0.976	0.976	0.976	0.976
+macro avg	0.517	0.784	0.526	143803.000
+weighted avg	0.998	0.976	0.987	143803.000
+___________________________________________
+
+
+Training Accuracy :  0.9196010343210759
+Test Accuracy :  0.9760992468863654
+________________________________________
+
+
+
+recision	recall	f1-score	support
+0	0.999	0.977	0.988	143605.000
+1	0.035	0.596	0.066	198.000
+accuracy	0.977	0.977	0.977	0.977
+macro avg	0.517	0.787	0.527	143803.000
+weighted avg	0.998	0.977	0.987	143803.000
+___________________________________________
+
+
+Training Accuracy :  0.9162538821858157
+Test Accuracy :  0.9766694714296642
+
+
+time = fn.Timer()
+time.start()
+rf_clf3 = RandomForestClassifier(criterion='gini', max_depth=4, max_features=.45, n_estimators=105, class_weight='balanced', random_state=111)
+rf_clf3.fit(X_train_res, y_train_res)
+time.stop()
+
+
+precision	recall	f1-score	support
+0	0.999	0.977	0.988	143605.000
+1	0.035	0.591	0.066	198.000
+accuracy	0.977	0.977	0.977	0.977
+macro avg	0.517	0.784	0.527	143803.000
+weighted avg	0.998	0.977	0.987	143803.000
+___________________________________________
+
+
+Training Accuracy :  0.9187259466962541
+Test Accuracy :  0.9768433203757919
+
+
+feature	coef
+16	covid19_symptoms	0.362167
+27	opinion_infection	0.260554
+13	rate_reducing_risk_single	0.158285
+29	omwasnull	0.033411
+17	covid19_contact	0.025581
+227	text_working_stopped	0.022715
+218	smoking_quit0	0.019233
+228	text_working_travel critical	0.013115
+217	smoking_never	0.011166
+225	text_working_home	0.009152
+8	lsd	0.008735
+0	age	0.007987
+226	text_working_never	0.007480
+14	rate_reducing_risk_house	0.007148
+11	house_count	0.005771
+23	diabetes	0.005338
+28	opinion_mortality	0.004708
+211	blood_type_ap	0.004421
+18	asthma	0.002889
+109	country_IT	0.002830
+
+
+time = fn.Timer()
+time.start()
+rf_clf3 = RandomForestClassifier(criterion='gini', max_depth=3, max_features=.45, n_estimators=95, class_weight='balanced', random_state=111)
+rf_clf3.fit(X_train_res, y_train_res)
+time.stop()
+precision	recall	f1-score	support
+0	0.999	0.974	0.987	143605.000
+1	0.031	0.606	0.060	198.000
+accuracy	0.974	0.974	0.974	0.974
+macro avg	0.515	0.790	0.523	143803.000
+weighted avg	0.998	0.974	0.985	143803.000
+___________________________________________
+
+
+Training Accuracy :  0.8996539109685386
+Test Accuracy :  0.973741855176874
+
+covid19_symptoms	0.362167
+27	opinion_infection	0.260554
+13	rate_reducing_risk_single	0.158285
+29	omwasnull	0.033411
+17	covid19_contact	0.025581
+227	text_working_stopped	0.022715
+218	smoking_quit0	0.019233
+228	text_working_travel critical	0.013115
+217	smoking_never	0.011166
+225	text_working_home	0.009152
+8	lsd	0.008735
+0	age	0.007987
+226	text_working_never	0.007480
+14	rate_reducing_risk_house	0.007148
+11	house_count	0.005771
+23	diabetes	0.005338
+28	opinion_mortality	0.004708
+211	blood_type_ap	0.004421
+18	asthma	0.002889
+109	country_IT	0.002830
