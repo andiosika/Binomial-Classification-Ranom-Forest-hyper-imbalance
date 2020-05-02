@@ -102,3 +102,8 @@
 [0430/203246.045:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0430/203246.045:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
 [0430/203246.045:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0502/125730.777:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0502/125731.033:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0502/125731.033:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0502/125731.265:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
+[0502/125731.265:ERROR:process_reader_win.cc(151)] SuspendThread: Access is denied. (0x5)
