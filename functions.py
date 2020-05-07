@@ -33,19 +33,19 @@ def plot_importance(clf, X_train, top_n=20,figsize=(15,12)):
     using .feature_importance_ from the corresponding classification 
     model
     """
-    df_import = pd.Series(clf.feature_importances_, index=X_train.columns, name='importance').head(top_n)
-    df_import.sort_values().plot(kind='barh', figsize=(15,12))
-    return df_importance
+    df_import = pd.Series(clf.feature_importances_, index=X_train.columns, name='importance')
+    df_import.sort_values().tail(top_n).plot(kind='barh', figsize=(10,10))
+    return df_import.sort_values(ascending=False)
 
 def df_import(clf, X_train, n=20):  
     import pandas as pd
 
     df_import = pd.DataFrame(clf.feature_importances_, X_train.columns)
     df_import.reset_index(inplace=True)
-    df_import.columns = ['factor', 'coef']
-    x = df_import.sort_values('coef', ascending=False).head(n)
+    df_import.columns = ['factor', 'importance']
+    x = df_import.sort_values('importance', ascending=False).head(n)
     x.reset_index(drop=True,inplace=True)
-    y = x.sort_values('coef', ascending=False).head(n).style.bar(subset=['coef'], color='#d65f5f')
+    y = x.sort_values('importance', ascending=False).head(n).style.bar(subset=['importance'], color='#d65f5f')
     
     return y
     
