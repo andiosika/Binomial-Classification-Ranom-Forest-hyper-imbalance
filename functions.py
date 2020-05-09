@@ -2,6 +2,13 @@
 
 
 def des(feature):
+    ''' args: 
+        col - df['column'], the column name from 
+    a pd.DataFrame
+
+    Takes a feature from a dataframe and provides value counts, 
+    high-level information and provides a visual to identify 
+    outliers'''
     import seaborn as sns
     
     y = feature.value_counts()
@@ -31,13 +38,27 @@ def plot_importance(clf, X_train, top_n=20,figsize=(15,12)):
 
     Plots the top features affecting categorization
     using .feature_importance_ from the corresponding classification 
-    model
-    """
+    model"""
+
     df_import = pd.Series(clf.feature_importances_, index=X_train.columns, name='importance')
     df_import.sort_values().tail(top_n).plot(kind='barh', figsize=(10,10))
     return df_import.sort_values(ascending=False)
 
 def df_import(clf, X_train, n=20):  
+     """args:
+    classification model - designed on DecisionTreeClassification
+
+    Training data
+
+    n - (default=20) The count of features requested to display
+    
+    figsize - (default(15,20) The figure size required to best visually display 
+    this information.
+
+    Visually displays the top features affecting categorization
+    using .feature_importance_ from the corresponding classification 
+    model
+    """
     import pandas as pd
 
     df_import = pd.DataFrame(clf.feature_importances_, X_train.columns)
@@ -67,7 +88,8 @@ def evaluate_model(X_true, y_true, y_pred, X_train, y_train, clf):
     split
     
     returns a classification report detailing the f1, and accuracy score
-    along with visuals to inform results'''
+    along with visuals to inform results including a confusion matrix and
+    ROC Curve'''
 
        ## Classification Report / Scores 
     
@@ -144,6 +166,14 @@ def bxplt(col):
 
     ## a timer to record how long a process takes
 class Timer():
+'''A timer used to record how long a process takes.
+
+After instaniating, a .start() and .stop() can be used 
+before and after a process in respective order.'''
+
+
+
+
     ## def init
     def __init__(self,format_="%m/%d/%y - %I:%M %p"):
         import tzlocal
