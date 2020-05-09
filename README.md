@@ -22,7 +22,7 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
 [Main Dataset](#Main-Dataset:) | The dataset in it's final form used for the predictive modeling results described in the [Conclusion](#Conclusion:)  section
 [Modeling](#Modeling:) | Various iterations of predictive classification modeling including Decision Trees, Random Forest and XGBoost
 [Best Model](#BEST-MODEL:-Manually-Tuned-Random-Forest) |Random Forest Classification Model including [Visualizations]() Confusion Matrix, ROC Curve, Feature Importance by Rank, Correlations
-    [Conclusion](#Conclusion:) | Summation of outcomes from modeling
+[Conclusion](#Conclusion:) | Summation of outcomes from modeling
     
 
 
