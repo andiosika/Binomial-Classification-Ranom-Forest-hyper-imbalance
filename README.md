@@ -1071,10 +1071,10 @@ Those taking prescription medications could suggest a state poor health, but cla
 
 ## Recommendations: 
 >1. If an individual has symptoms associated with COVID-19, or think they could be infected, testing is recommended for confirmation.
-2. Practice social distancing and hygiene individually and as a household
-        *This is especially true for males and those with high BMI.
-3. Avoid contact with those known to be infected.
-4.  If taking prescription medication, it is recommended to discuss additional risk for infection with a physician.
+>2. Practice social distancing and hygiene individually and as a household
+>       *This is especially true for males and those with high BMI.
+>3. Avoid contact with those known to be infected.
+?4.  If taking prescription medication, it is recommended to discuss additional risk for infection with a physician.
 
     
  
