@@ -2,7 +2,7 @@
 
 Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
 
-The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall.
+The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall using biological, behavioral and environmental data to classify those who would test postive for COVID-19.
 
 **Main Files:** 
 
