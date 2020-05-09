@@ -13,7 +13,7 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
 * Blog post URL: https://andiosika.github.io/imbalanced_data
 
 
-## Project Quick Links:
+## Project Links Within Main student.ipynb File:
 **Link** | **Description**
 --| --|
 [Background](#Background:) | Details around the subject, datasource and objective
