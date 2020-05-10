@@ -45,7 +45,8 @@ def plot_importance(clf, X_train, top_n=20,figsize=(15,12)):
     return df_import.sort_values(ascending=False)
 
 def df_import(clf, X_train, n=20):  
-     """args:
+    import pandas as pd
+    """args:
     classification model - designed on DecisionTreeClassification
 
     Training data
@@ -59,8 +60,6 @@ def df_import(clf, X_train, n=20):
     using .feature_importance_ from the corresponding classification 
     model
     """
-    import pandas as pd
-
     df_import = pd.DataFrame(clf.feature_importances_, X_train.columns)
     df_import.reset_index(inplace=True)
     df_import.columns = ['factor', 'importance']
@@ -166,10 +165,9 @@ def bxplt(col):
 
     ## a timer to record how long a process takes
 class Timer():
-'''A timer used to record how long a process takes.
-
-After instaniating, a .start() and .stop() can be used 
-before and after a process in respective order.'''
+    '''A timer used to record how long a process takes.
+    After instaniating, a .start() and .stop() can be used 
+    before and after a process in respective order.'''
 
 
 
