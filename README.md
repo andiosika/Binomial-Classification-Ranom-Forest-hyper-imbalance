@@ -54,27 +54,6 @@ df = pd.read_csv("master_dataset4.csv")
 pd.set_option('display.max_columns', 0)
 df.head()
 ```
-
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
- 
-
 ### Features and Descriptions:
 
 There are 43 features on which data was collected around biometetrics, behavior and enviromnent.  
