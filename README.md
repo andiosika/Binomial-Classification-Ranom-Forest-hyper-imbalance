@@ -1,4 +1,4 @@
-## Mod 3 Project: Binomal Classification
+## Project: Binomal Classification using Random Forest for Hyper-Imbalanced Target
 
 Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
 
