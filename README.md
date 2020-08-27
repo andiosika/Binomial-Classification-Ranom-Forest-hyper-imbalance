@@ -163,7 +163,7 @@ plt.title('US Represents 87% of Data:')
 
 
 
-![png](output_14_1.png)
+![png](imgs/output_14_1.png)
 
 
 
