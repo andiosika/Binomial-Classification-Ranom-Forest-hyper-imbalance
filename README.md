@@ -112,7 +112,7 @@ opinion_mortality | No information is given about this feature, no longer collec
 risk_infection | calc'd risk for infection (based on their models)
 risk_mortality | calc'd risk for mortality (based on their models)
    
-## Inspecting the dataset:
+___
 
 This set of data contains just over 619K entries and has 43 columns of both numeric and categorical data.  Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
 
@@ -319,23 +319,9 @@ df.corr()['covid19_positive'].sort_values(ascending=False).plot(kind='barh', fig
 
 
 
-![png](output_19_1.png)
-
-
-
-```python
-df.corr().style.format("{:.2}").background_gradient(cmap=plt.get_cmap('coolwarm'), axis=1) 
-```
-
-
-
-
-
-
-
 ### Raw Data Inspection Observations: 
 
-> Most of the data collected ~ 87% comes from the United states with Canada 5% and UK 2.5% next.  The rest of the countries reporting are even smaller in terms of contribution size.  A very small percentage: **.0014% tested positive for COVID-19** in this sample.  There are no direct correlations and the most highly correlated features of the unprocessed data are: 
+> Most of the data collected ~ 87% comes from the United states with Canada 5% and UK 2.5% next.  The rest of the countries reporting are even smaller in terms of contribution size.  A very small percentage: **.14% tested positive for COVID-19** in this sample.  There are no direct correlations and the most highly correlated features of the unprocessed data are: 
 
 Feature: |  Correlation: 
  --| --|
@@ -382,37 +368,10 @@ missingno.matrix(df)
 
 
 
-![png](output_25_1.png)
-
-
-Aditional inspection shows that there are quite a few columns with less than 5% null values.  Since this dataset is so large, it seems reasonable to remove these.  Details follow:
-
-
-```python
-nulls = pd.DataFrame(df.isna().sum()/len(df)*100)
-nulls = pd.DataFrame(nulls.reset_index())
-nulls.columns=['variable', '%_Null']
-nulls.sort_values(by='%_Null', ascending=False, inplace=True)
-nulls
-
-```
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
