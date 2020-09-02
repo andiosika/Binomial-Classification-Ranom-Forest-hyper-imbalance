@@ -718,11 +718,6 @@ plt.title('Covid19 Positive Rates')
     Text(0.5, 1.0, 'Covid19 Positive Rates')
 
 
-
-
-![png](output_38_2.png)
-
-
 ### Inspecting training set  for imbalance 
 
 
