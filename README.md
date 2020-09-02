@@ -1,6 +1,6 @@
 ## Project: Binomal Classification using Random Forest for Hyper-Imbalanced Target
 
-Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
+Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.14% of samples) as target. 
 
 The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall that uses biological, behavioral and environmental data collected to predict those who would test postive for COVID-19.
 
@@ -13,7 +13,7 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
 * Blog post URL: https://andiosika.github.io/imbalanced_data
 
 
-## Project Links Within Main student.ipynb File:
+## Project Sections Within Main student.ipynb File:
 **Link** | **Description**
 --| --|
 [Background](#Background:) | Details around the subject, datasource and objective
@@ -26,8 +26,9 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
     
 
 
-<img src='https://raw.githubusercontent.com/andiosika/dsc-mod-3-project-v2-1-online-ds-pt-100719/master/c0481846-wuhan_novel_coronavirus_illustration-spl.jpg' width=40% alignment=l>
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/c0481846-wuhan_novel_coronavirus_illustration-spl.jpg' width=40% alignment=l>
 
+____
 ## Background:
 
 Coronavirus disease (COVID-19) is an infectious disease.  It was discovered in late 2019 and early 2020 and originated from Wuhan, China.  It escalated into a global pandemic.
@@ -46,7 +47,7 @@ The questionaire used to collect data has since undergone several versions and s
 
 **The intention of this classification project is to identify primary contributing factors for contracting COVID-19.**
 
-
+___
 ```python
 ##Importing dataset
 import pandas as pd
@@ -54,6 +55,11 @@ df = pd.read_csv("master_dataset4.csv")
 pd.set_option('display.max_columns', 0)
 df.head()
 ```
+
+____
+
+## Inspecting the dataset:
+
 ### Features and Descriptions:
 
 There are 43 features on which data was collected around biometetrics, behavior and enviromnent.  
@@ -105,78 +111,24 @@ opinion_infection | No information is given about this feature, no longer collec
 opinion_mortality | No information is given about this feature, no longer collecting data on this, it is theorized that it had to do with if the subject believed they could die from the infection.
 risk_infection | calc'd risk for infection (based on their models)
 risk_mortality | calc'd risk for mortality (based on their models)
-
-
-## Inspecting the dataset:
-
-#### Software Package Installs:
-
-
-```python
-# Package Installs
-import matplotlib.pyplot as plt
-
-import seaborn as sns
-from pandas_profiling import ProfileReport
-from imblearn.over_sampling import SMOTE
-from sklearn.tree import DecisionTreeClassifier
-import functions as fn
-import importlib
-
-from sklearn.metrics import accuracy_score, f1_score
-from sklearn.ensemble import RandomForestClassifier
-from sklearn.model_selection import cross_val_score
-from imblearn.over_sampling import SMOTE
-from imblearn.under_sampling import RandomUnderSampler
-```
-
-    C:\Users\aosika\AppData\Local\Continuum\anaconda3\envs\learn-env\lib\site-packages\sklearn\externals\six.py:31: FutureWarning: The module is deprecated in version 0.21 and will be removed in version 0.23 since we've dropped support for Python 2.7. Please rely on the official version of six (https://pypi.org/project/six/).
-      "(https://pypi.org/project/six/).", FutureWarning)
-    
-
-    2020-05-07 09:49:31.767234-07:00
-    [i] Timer started at05/07/20 - 09:49 AM
-    [i] Timer ended at 05/07/20 - 09:49 AM
-    - Total time = 0:00:00
-    
-
-    C:\Users\aosika\AppData\Local\Continuum\anaconda3\envs\learn-env\lib\site-packages\sklearn\utils\deprecation.py:144: FutureWarning: The sklearn.neighbors.base module is  deprecated in version 0.22 and will be removed in version 0.24. The corresponding classes / functions should instead be imported from sklearn.neighbors. Anything that cannot be imported from sklearn.neighbors is now part of the private API.
-      warnings.warn(message, FutureWarning)
-    
+   
+___
 
 This set of data contains just over 619K entries and has 43 columns of both numeric and categorical data.  Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
+
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
 
 ### Data Background Observation: 
 > The data was provided by subjects from 173 countries.  It is noted that 87% of the data comes from the US.  The next top provider of data is Canada ~5% , followed by the United Kingdom ~2.3%:
 
-
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_18_1.png', width=35%, aligment=l>
 ```python
 countriesdf.head(5).plot(kind='bar', color='r')
 plt.title('US Represents 87% of Data:')
 ```
 
-
-
-
     Text(0.5, 1.0, 'US Represents 87% of Data:')
 
-
-
-
-![png](imgs/output_14_1.png)
-
-
-
-```python
-df['covid19_positive'].value_counts()
-```
-
-
-
-
-    0    618134
-    1       893
-    Name: covid19_positive, dtype: int64
 
 
 
@@ -184,7 +136,17 @@ df['covid19_positive'].value_counts()
 
 > Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .0014%
 
-This is an approximate ratio of 1:1000
+```python
+df['covid19_positive'].value_counts()
+```
+    0    618134
+    1       893
+    Name: covid19_positive, dtype: int64
+
+This is an approximate ratio of 1:700
+
+
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_129_2.png', width=35% aligment=l>
 
 #### Inspecting correlations:
 
@@ -194,23 +156,6 @@ df_cor = pd.DataFrame(df.corr()['covid19_positive'].sort_values(ascending=False)
 df_cor
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -374,23 +319,9 @@ df.corr()['covid19_positive'].sort_values(ascending=False).plot(kind='barh', fig
 
 
 
-![png](output_19_1.png)
-
-
-
-```python
-df.corr().style.format("{:.2}").background_gradient(cmap=plt.get_cmap('coolwarm'), axis=1) 
-```
-
-
-
-
-
-
-
 ### Raw Data Inspection Observations: 
 
-> Most of the data collected ~ 87% comes from the United states with Canada 5% and UK 2.5% next.  The rest of the countries reporting are even smaller in terms of contribution size.  A very small percentage: **.0014% tested positive for COVID-19** in this sample.  There are no direct correlations and the most highly correlated features of the unprocessed data are: 
+> Most of the data collected ~ 87% comes from the United states with Canada 5% and UK 2.5% next.  The rest of the countries reporting are even smaller in terms of contribution size.  A very small percentage: **.14% tested positive for COVID-19** in this sample.  There are no direct correlations and the most highly correlated features of the unprocessed data are: 
 
 Feature: |  Correlation: 
  --| --|
@@ -437,37 +368,10 @@ missingno.matrix(df)
 
 
 
-![png](output_25_1.png)
-
-
-Aditional inspection shows that there are quite a few columns with less than 5% null values.  Since this dataset is so large, it seems reasonable to remove these.  Details follow:
-
-
-```python
-nulls = pd.DataFrame(df.isna().sum()/len(df)*100)
-nulls = pd.DataFrame(nulls.reset_index())
-nulls.columns=['variable', '%_Null']
-nulls.sort_values(by='%_Null', ascending=False, inplace=True)
-nulls
-
-```
+<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
 
 
 
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
 </style>
 <table border="1" class="dataframe">
   <thead>
@@ -812,11 +716,6 @@ plt.title('Covid19 Positive Rates')
 
 
     Text(0.5, 1.0, 'Covid19 Positive Rates')
-
-
-
-
-![png](output_38_2.png)
 
 
 ### Inspecting training set  for imbalance 
