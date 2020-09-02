@@ -1,6 +1,6 @@
 ## Project: Binomal Classification using Random Forest for Hyper-Imbalanced Target
 
-Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
+Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.14% of samples) as target. 
 
 The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall that uses biological, behavioral and environmental data collected to predict those who would test postive for COVID-19.
 
@@ -27,8 +27,8 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
 
 
 <img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/c0481846-wuhan_novel_coronavirus_illustration-spl.jpg' width=40% alignment=l>
-___
 
+____
 ## Background:
 
 Coronavirus disease (COVID-19) is an infectious disease.  It was discovered in late 2019 and early 2020 and originated from Wuhan, China.  It escalated into a global pandemic.
@@ -55,6 +55,11 @@ df = pd.read_csv("master_dataset4.csv")
 pd.set_option('display.max_columns', 0)
 df.head()
 ```
+
+____
+
+## Inspecting the dataset:
+
 ### Features and Descriptions:
 
 There are 43 features on which data was collected around biometetrics, behavior and enviromnent.  
@@ -138,7 +143,7 @@ df['covid19_positive'].value_counts()
     1       893
     Name: covid19_positive, dtype: int64
 
-This is an approximate ratio of 1:1000
+This is an approximate ratio of 1:700
 
 
 <img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_129_2.png', width=35% aligment=l>
@@ -151,23 +156,6 @@ df_cor = pd.DataFrame(df.corr()['covid19_positive'].sort_values(ascending=False)
 df_cor
 ```
 
-
-
-
-<div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
