@@ -56,7 +56,7 @@ The questionaire used to collect data has since undergone several versions and s
 
 #### Target Class is highly imbalanced: 
 
-> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .13%
+> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .14% After preprocessing and modeling, the target occurance was .13% as indicated in the image below:
 
 This is an approximate ratio of 1:700
 
