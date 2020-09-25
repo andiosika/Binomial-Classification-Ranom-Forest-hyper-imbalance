@@ -37,7 +37,7 @@ According to the [World Health Organization](https://www.who.int/health-topics/c
 
 The best way to prevent and slow down transmission is be well informed about the COVID-19 virus, the disease it causes and how it spreads. In response, much data has been collected in various ways to further inform ways to slow the spread. 
 
-The dataset used in this evaluation was created by a project created by a UK based platform-solutions company called [Nexoid]( https://www.nexoid.com/). At the start of the pandemic, Nexoid noted that there was a lack of large datasets required to predict the spread and mortality rates related to COVID-19. They took it upon themselves to create and share this dataset as an effort to better understand these factors. It is a not-for-profit project with the goal of providing researchers and governments the data needed to help understand and fight COVID-19. It is a sample provided by self-reporting of over 618,000 individuals and collects biological, behavioral, and environmental factors as well as their COVID-19 status.
+The dataset used in this evaluation was created by a project created by a UK based platform-solutions company called [Nexoid]( https://www.nexoid.com/). At the start of the pandemic, Nexoid noted that there was a lack of large datasets required to predict the spread and mortality rates related to COVID-19. They took it upon themselves to create and share this dataset as an effort to better understand these factors. It is a not-for-profit project with the goal of providing researchers and governments the data needed to help understand and fight COVID-19. It is a sample provided by self-reporting of over 618,000 individuals and collected a total of 43 biometric, behavioral, and environmental factors as well as their COVID-19 status.
 
 The data is collected here: 
 https://www.covid19survivalcalculator.com/ .  In exchange for the data, a risk of infection and mortality are returned to the user based on Nexoid's model which is not publicly sharded, yet recorded in this dataset post-hoc.  These values are reflected in the columns risk_infection and risk_mortality.
@@ -47,24 +47,7 @@ The questionaire used to collect data has since undergone several versions and s
 
 **The intention of this classification project is to identify primary contributing factors for contracting COVID-19.**
 
-___
-```python
-##Importing dataset
-import pandas as pd
-df = pd.read_csv("master_dataset4.csv")
-pd.set_option('display.max_columns', 0)
-df.head()
-```
-
-____
-
-## Inspecting the dataset:
-
-### Features and Descriptions:
-
-There are 43 features on which data was collected around biometetrics, behavior and enviromnent.  
-
-Details are below:
+## The features data was collected on are detailed in the table below:
 
 **Feature** | **Description**
 --|--
@@ -114,7 +97,7 @@ risk_mortality | calc'd risk for mortality (based on their models)
    
 ___
 
-This set of data contains just over 619K entries and has 43 columns of both numeric and categorical data.  Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
+ Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
 
 <img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
 
@@ -122,26 +105,10 @@ This set of data contains just over 619K entries and has 43 columns of both nume
 > The data was provided by subjects from 173 countries.  It is noted that 87% of the data comes from the US.  The next top provider of data is Canada ~5% , followed by the United Kingdom ~2.3%:
 
 <img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_18_1.png', width=35%, aligment=l>
-```python
-countriesdf.head(5).plot(kind='bar', color='r')
-plt.title('US Represents 87% of Data:')
-```
-
-    Text(0.5, 1.0, 'US Represents 87% of Data:')
-
-
-
 
 #### Target Class is highly imbalanced: 
 
-> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .0014%
-
-```python
-df['covid19_positive'].value_counts()
-```
-    0    618134
-    1       893
-    Name: covid19_positive, dtype: int64
+> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .14%
 
 This is an approximate ratio of 1:700
 
@@ -321,7 +288,7 @@ df.corr()['covid19_positive'].sort_values(ascending=False).plot(kind='barh', fig
 
 ### Raw Data Inspection Observations: 
 
-> Most of the data collected ~ 87% comes from the United states with Canada 5% and UK 2.5% next.  The rest of the countries reporting are even smaller in terms of contribution size.  A very small percentage: **.14% tested positive for COVID-19** in this sample.  There are no direct correlations and the most highly correlated features of the unprocessed data are: 
+A quick look revealed that were no direct correlations and the most highly correlated features of the unprocessed data are: 
 
 Feature: |  Correlation: 
  --| --|
@@ -342,7 +309,6 @@ height | 0.006999
 
 This section outlines steps taken to prepare the data for analysis. The first step was to address missing/null values.  
 
-
 Initial visual inspection of null values indicates that region and prescription medication are sparsely populated.  Since region was ~90% missing, it was dropped.  Prescription medication had 57K values and details are [included in this section](#Prescription-Medication). 
 
 The opinion_infections and opinion_mortality columns are also a little 'light' in terms of responses and have the same number of responses.  This null rate of ~16% was imputed with the median values for each respective field. 
@@ -351,20 +317,7 @@ Null values in columns that contain <5% null values were dropped.
 
 Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See below).
 
-
 ### Null or Missing Data: 
-
-
-```python
-import missingno
-missingno.matrix(df)
-```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x22780ff8b38>
-
 
 
 
