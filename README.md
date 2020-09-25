@@ -97,14 +97,11 @@ risk_mortality | calc'd risk for mortality (based on their models)
    
 ___
 
- Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
-
-<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
 
 ### Data Background Observation: 
 > The data was provided by subjects from 173 countries.  It is noted that 87% of the data comes from the US.  The next top provider of data is Canada ~5% , followed by the United Kingdom ~2.3%:
 
-<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_18_1.png', width=35%, aligment=l>
+![GitHub Logo](/imgs/output_18_1.png)
 
 #### Target Class is highly imbalanced: 
 
@@ -112,8 +109,7 @@ ___
 
 This is an approximate ratio of 1:700
 
-
-<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_129_2.png', width=35% aligment=l>
+![GitHub Logo](/imgs/output_129_2.png)
 
 #### Inspecting correlations:
 
@@ -123,168 +119,9 @@ df_cor = pd.DataFrame(df.corr()['covid19_positive'].sort_values(ascending=False)
 df_cor
 ```
 
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>covid19_positive</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>covid19_positive</th>
-      <td>1.000000</td>
-    </tr>
-    <tr>
-      <th>risk_infection</th>
-      <td>0.198632</td>
-    </tr>
-    <tr>
-      <th>covid19_symptoms</th>
-      <td>0.089861</td>
-    </tr>
-    <tr>
-      <th>opinion_infection</th>
-      <td>0.054837</td>
-    </tr>
-    <tr>
-      <th>covid19_contact</th>
-      <td>0.050774</td>
-    </tr>
-    <tr>
-      <th>risk_mortality</th>
-      <td>0.014074</td>
-    </tr>
-    <tr>
-      <th>mdma</th>
-      <td>0.012152</td>
-    </tr>
-    <tr>
-      <th>heart_disease</th>
-      <td>0.007975</td>
-    </tr>
-    <tr>
-      <th>weight</th>
-      <td>0.007503</td>
-    </tr>
-    <tr>
-      <th>lsd</th>
-      <td>0.007137</td>
-    </tr>
-    <tr>
-      <th>height</th>
-      <td>0.006999</td>
-    </tr>
-    <tr>
-      <th>cocaine</th>
-      <td>0.006833</td>
-    </tr>
-    <tr>
-      <th>rate_reducing_mask</th>
-      <td>0.006201</td>
-    </tr>
-    <tr>
-      <th>ip_longitude</th>
-      <td>0.006122</td>
-    </tr>
-    <tr>
-      <th>diabetes</th>
-      <td>0.005700</td>
-    </tr>
-    <tr>
-      <th>kidney_disease</th>
-      <td>0.004725</td>
-    </tr>
-    <tr>
-      <th>other_chronic</th>
-      <td>0.004638</td>
-    </tr>
-    <tr>
-      <th>compromised_immune</th>
-      <td>0.004308</td>
-    </tr>
-    <tr>
-      <th>bmi</th>
-      <td>0.004280</td>
-    </tr>
-    <tr>
-      <th>hypertension</th>
-      <td>0.004055</td>
-    </tr>
-    <tr>
-      <th>hiv_positive</th>
-      <td>0.003993</td>
-    </tr>
-    <tr>
-      <th>contacts_count</th>
-      <td>0.003741</td>
-    </tr>
-    <tr>
-      <th>ip_latitude</th>
-      <td>0.003448</td>
-    </tr>
-    <tr>
-      <th>lung_disease</th>
-      <td>0.003296</td>
-    </tr>
-    <tr>
-      <th>amphetamines</th>
-      <td>0.002425</td>
-    </tr>
-    <tr>
-      <th>asthma</th>
-      <td>0.001956</td>
-    </tr>
-    <tr>
-      <th>house_count</th>
-      <td>-0.001151</td>
-    </tr>
-    <tr>
-      <th>ip_accuracy</th>
-      <td>-0.001347</td>
-    </tr>
-    <tr>
-      <th>opinion_mortality</th>
-      <td>-0.002450</td>
-    </tr>
-    <tr>
-      <th>alcohol</th>
-      <td>-0.004070</td>
-    </tr>
-    <tr>
-      <th>cannabis</th>
-      <td>-0.004418</td>
-    </tr>
-    <tr>
-      <th>rate_government_action</th>
-      <td>-0.005191</td>
-    </tr>
-    <tr>
-      <th>rate_reducing_risk_house</th>
-      <td>-0.010192</td>
-    </tr>
-    <tr>
-      <th>rate_reducing_risk_single</th>
-      <td>-0.013982</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
-
-
-
 ```python
 df.corr()['covid19_positive'].sort_values(ascending=False).plot(kind='barh', figsize=(12,12))
 ```
-
-
-
-
-    <matplotlib.axes._subplots.AxesSubplot at 0x2278095ccc0>
-
-
-
 
 ### Raw Data Inspection Observations: 
 
@@ -309,251 +146,17 @@ height | 0.006999
 
 This section outlines steps taken to prepare the data for analysis. The first step was to address missing/null values.  
 
+Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
+
+![GitHub Logo](/imgs/output_30_1.png)
+
 Initial visual inspection of null values indicates that region and prescription medication are sparsely populated.  Since region was ~90% missing, it was dropped.  Prescription medication had 57K values and details are [included in this section](#Prescription-Medication). 
 
 The opinion_infections and opinion_mortality columns are also a little 'light' in terms of responses and have the same number of responses.  This null rate of ~16% was imputed with the median values for each respective field. 
 
 Null values in columns that contain <5% null values were dropped.  
 
-Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See below).
-
-### Null or Missing Data: 
-
-
-
-<img src='https://github.com/andiosika/Binomial-Classification-Ranom-Forest-hyper-imbalance/blob/master/imgs/output_30_1.png', width=40%, alignment=l>
-
-
-
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>variable</th>
-      <th>%_Null</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>1</th>
-      <td>region</td>
-      <td>93.167342</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>prescription_medication</td>
-      <td>68.800876</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>opinion_mortality</td>
-      <td>17.445604</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>opinion_infection</td>
-      <td>17.445604</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>cocaine</td>
-      <td>4.705611</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>amphetamines</td>
-      <td>4.430825</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>lsd</td>
-      <td>4.089644</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>mdma</td>
-      <td>3.513255</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>cannabis</td>
-      <td>2.017198</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>text_working</td>
-      <td>0.683654</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>contacts_count</td>
-      <td>0.683654</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>rate_reducing_mask</td>
-      <td>0.299341</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>smoking</td>
-      <td>0.299341</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>alcohol</td>
-      <td>0.299341</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>risk_infection</td>
-      <td>0.012439</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>risk_mortality</td>
-      <td>0.012439</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>country</td>
-      <td>0.002746</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>ip_accuracy</td>
-      <td>0.000162</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>blood_type</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>kidney_disease</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>ip_latitude</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>ip_longitude</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>other_chronic</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>hypertension</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>hiv_positive</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>diabetes</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>lung_disease</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>heart_disease</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>compromised_immune</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>asthma</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>bmi</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>covid19_contact</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>covid19_symptoms</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>covid19_positive</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>sex</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>rate_reducing_risk_house</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>rate_reducing_risk_single</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>rate_government_action</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>age</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>house_count</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>height</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>weight</td>
-      <td>0.000000</td>
-    </tr>
-    <tr>
-      <th>0</th>
-      <td>survey_date</td>
-      <td>0.000000</td>
-    </tr>
-  </tbody>
-</table>
-</div>
-
+Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See above).
 
 
 ## Main Dataset:
@@ -572,11 +175,9 @@ In addition the following columns were dropped with rationale below:
 
 ## Train/Test Split:
 
-
 ```python
 from sklearn.model_selection import train_test_split
 ```
-
 
 ```python
 y = df2['covid19_positive'].copy()
@@ -584,13 +185,9 @@ X = df2.drop('covid19_positive', axis=1).copy()
 
 ```
 
-
 ```python
 y.value_counts()
 ```
-
-
-
 
     0    574419
     1       791
