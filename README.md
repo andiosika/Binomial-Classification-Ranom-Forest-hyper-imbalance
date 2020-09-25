@@ -1,6 +1,6 @@
 ## Project: Binomal Classification using Random Forest for Hyper-Imbalanced Target
 
-Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.14% of samples) as target. 
+Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
 
 The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall that uses biological, behavioral and environmental data collected to predict those who would test postive for COVID-19.
 
@@ -56,7 +56,7 @@ The questionaire used to collect data has since undergone several versions and s
 
 #### Target Class is highly imbalanced: 
 
-> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .14%
+> Out of the nearly 618,134 samples, 893 tested positive for COVID-19, or .13%
 
 This is an approximate ratio of 1:700
 
