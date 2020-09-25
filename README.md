@@ -62,24 +62,14 @@ This is an approximate ratio of 1:700
 
 ![GitHub Logo](/imgs/output_129_2.png)
 
-## Preprocessing:
-
-This section outlines steps taken to prepare the data for analysis. The first step was to address missing/null values.  
+## The dataset:
 
 Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.  You can see the 43 features in the image below, as well as how complete the data collection was for each.
 
 ![GitHub Logo](/imgs/output_30_1.png)
 
-Initial visual inspection of null values indicates that region and prescription medication are sparsely populated.  Since region was ~90% missing, it was dropped.  Prescription medication had 57K values and details are [included in this section](#Prescription-Medication). 
-
-The opinion_infections and opinion_mortality columns are also a little 'light' in terms of responses and have the same number of responses.  This null rate of ~16% was imputed with the median values for each respective field. 
-
-Null values in columns that contain <5% null values were dropped.  
-
-Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See above).
 
 #### Inspecting correlations:
-
 
 ```python
 df_cor = pd.DataFrame(df.corr()['covid19_positive'].sort_values(ascending=False))
@@ -185,15 +175,11 @@ time.stop()
 ```python
 yh8=rf_clf8.predict(X_test)
 ```
-```python
-mean_rf_cv_score = np.mean(cross_val_score(rf_clf8, X_train, y_train, cv=3))
-
-print(f"Mean Cross Validation Score for Random Forest Classifier: {mean_rf_cv_score :.2%}")
-```
 
 ```python
 fn.evaluate_model(X_test, y_test, yh8, X_train, y_train, rf_clf8)
 ```
+![GitHub Logo](/imgs/best_model_results.PNG)
 
 ###  Observations on manually tuned random forest:
 
@@ -206,107 +192,12 @@ The most important factors are listed below:
 ```python
 fn.df_import(rf_clf8,X_train,n=10)
 ```
-
-```python
-fn.plot_importance(rf_clf8,X_train)
-
-```
+![GitHub Logo](/imgs/feature_importance_best_model.PNG)
 
 #### Decision Tree visualizations from Random Forest Model:
 
+![GitHub Logo](/imgs/output_249_0.png)
 
-```python
-dot_data1 = export_graphviz(rf_clf8.estimators_[3], out_file=None, 
-                           feature_names=X_train.columns,  
-                           class_names=np.unique(y).astype('str'), 
-                           filled=True, rounded=True, special_characters=True)
-
-# Draw graph
-graph1 = graph_from_dot_data(dot_data1)  
-
-# Show graph
-Image(graph1.create_png())
-```
-
-#### Attempting Randomized Search:
-
-**WARNING: The following 7 input lines tast take 94.5 mins to run and have been commented out.** 
-
-The model was clearly overtrained and performed poorly.  Observations are recorded below:
-
-
-```python
-from sklearn.model_selection import RandomizedSearchCV
-```
-
-
-```python
-# stop
-# time = fn.Timer()
-# time.start()
-# rf_clfb = RandomForestClassifier(class_weight='balanced', random_state=111)
-# ## Set up param grid
-# param_grid = {'criterion':['gini','entropy'],
-#              'max_depth':[7,8, 10,15],
-#              'max_features':[.2, .3, .45],
-#              'n_estimators' :[75,100,125, 150]}
-
-# ## Instantiate GridSearchCV
-# rgrid_clfb = RandomizedSearchCV(rf_clfb, param_grid, n_jobs=-1, verbose=1, cv=skf)
-# time.stop()
-```
-
-
-```python
-#rgrid_clfb.fit(X_train, y_train)
-```
-
-
-```python
-yhtrgrid = rgrid_clfb.predict(X_test)
-```
-
-
-```python
-rgrid_clfb.best_params_
-```
-
-
-```python
-rf_clfb1 = RandomForestClassifier(criterion = 'gini', n_estimators=100, max_features=.2, 
-                                  max_depth=15, class_weight='balanced', random_state=111)
-time = fn.Timer()
-time.start()
-rf_clfb1.fit(X_train, y_train)
-time.stop()
-```
-
-
-```python
-# hytb1 = rf_clfb1.predict(X_test)
-```
-
-
-```python
-#fn.evaluate_model(X_test, y_test, hytb1, X_train_res, y_train_res, rf_clfb1)
-```
-
-#### Observations:
-Validates that a manually tuned Random Forest model performed best.  Depite the AUC remaining relatively high(86.1), the true positive rate is extremely poor at .12.
-
-precision | recall |	f1-score |	support
---| --| --| --|
-0	|**0.999**	|0.998|	0.999|	143605.000
-1	|0.085|	**0.116**	|0.098|	198.000
-accuracy	|0.997	|0.997|	0.997	|0.997
-macro avg|	0.542|	0.557	|0.548	|143803.000
-weighted avg|	0.998|0.997|	0.997	|143803.000
-___________________________________________
-
-
-Training Accuracy :  0.9988614576127981
-Test Accuracy :  0.9970584758315195
-____________________________________
 
 ## Conclusion:
 
