@@ -47,55 +47,6 @@ The questionaire used to collect data has since undergone several versions and s
 
 **The intention of this classification project is to identify primary contributing factors for contracting COVID-19.**
 
-## The features data was collected on are detailed in the table below:
-
-**Feature** | **Description**
---|--
-survey_date|The date the survey was submitted
-region	
-country |The country collected from IP address long, lat
-ip_latitude	|ip latitude of device at time of survey
-ip_longitude |ip longitude of device at time of survey	
-ip_accuracy	|-n/a
-sex	|Self reported sex
-age	| Self reported age based on birthdate
-height |Height in cm
-weight | Weight in kg
-bmi	| Body Mass Index as calculated from self-reported height and weight
-blood_type	| Blood type
-smoking	| reported smoking/vapeing habits (never, do, 1-5x, 6-20x, 20+, quit<5yrs, quit>5yrs, quit>10yrs
-alcohol	| reported days of alcohol consuption in last 14 days 
-cannabis | reported days of cannabis consumpiton in last 28 days
-amphetamines | reported days of amphetamine consumpiton in last 28 days	
-cocaine	| reported days of cocaine consumpiton in last 28 days
-lsd	| reported days of lsd consumpiton in last 28 days
-mdma | reported days of mdma(ecstacy) consumpiton in last 28 days	
-contacts_count	| reported contacts in the last week (1-20 and 20+)
-house_count	| how many people live in the subjects dwelling
-text_working | work/school travel behaviors (0-5 never did, always did, have stopped, critical only, still do)
-rate_government_action	| scale of attitude that government is taking covid-19 seriously (disagree, neutral, agree)
-rate_reducing_risk_single | scale of self-assesment to reduce risk(social distancing, hand washing) (disagree, neutral, agree)
-rate_reducing_risk_house | scale of assessesed co-habitators risk reduction (social distancing, hand washing)(disagree, neutral, agree)	
-rate_reducing_mask	| scale of how often a mask is worn outside dwelling 1-5 rarely, sometimes, usually)
-covid19_positive | A binomial value o=no, 1=yes to the question  "Do you have?"	
-covid19_symptoms | A binomial value o=no, 1=yes to the question  "Do you have?"	
-covid19_contact	|A binomial value 0=no, 1=yes to the question "Have you been in contact with someone who has tested positive?"
-asthma | A binomial value 0=no, 1=yes to the question "Do you have?"
-kidney_disease | A binomial value 0=no, 1=yes to the question "Do you have?"
-compromised_immune |  A binomial value 0=no, 1=yes to the question "Do you have?"
-heart_disease | A binomial value 0=no, 1=yes to the question "Do you have?"	
-lung_disease | A binomial value 0=no, 1=yes to the question "Do you have?"
-diabetes | A binomial value 0=no, 1=yes to the question "Do you have?"
-hiv_positive | A binomial value 0=no, 1=yes to the question "Do you have?"
-hypertension | A binomial value 0=no, 1=yes to the question "Do you have?"
-other_chronic | A binomial value 0=no, 1=yes to the question "Do you have?"
-prescription_medication | Reported prescription medications
-opinion_infection | No information is given about this feature, no longer collecting data on this, it is theorized that it had to do with if the subject believed they had the infection.
-opinion_mortality | No information is given about this feature, no longer collecting data on this, it is theorized that it had to do with if the subject believed they could die from the infection.
-risk_infection | calc'd risk for infection (based on their models)
-risk_mortality | calc'd risk for mortality (based on their models)
-   
-___
 
 
 ### Data Background Observation: 
@@ -110,6 +61,22 @@ ___
 This is an approximate ratio of 1:700
 
 ![GitHub Logo](/imgs/output_129_2.png)
+
+## Preprocessing:
+
+This section outlines steps taken to prepare the data for analysis. The first step was to address missing/null values.  
+
+Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.  You can see the 43 features in the image below, as well as how complete the data collection was for each.
+
+![GitHub Logo](/imgs/output_30_1.png)
+
+Initial visual inspection of null values indicates that region and prescription medication are sparsely populated.  Since region was ~90% missing, it was dropped.  Prescription medication had 57K values and details are [included in this section](#Prescription-Medication). 
+
+The opinion_infections and opinion_mortality columns are also a little 'light' in terms of responses and have the same number of responses.  This null rate of ~16% was imputed with the median values for each respective field. 
+
+Null values in columns that contain <5% null values were dropped.  
+
+Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See above).
 
 #### Inspecting correlations:
 
@@ -142,32 +109,16 @@ lsd |	0.007137
 height | 0.006999
 
 
-## Preprocessing:
-
-This section outlines steps taken to prepare the data for analysis. The first step was to address missing/null values.  
-
-Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.
-
-![GitHub Logo](/imgs/output_30_1.png)
-
-Initial visual inspection of null values indicates that region and prescription medication are sparsely populated.  Since region was ~90% missing, it was dropped.  Prescription medication had 57K values and details are [included in this section](#Prescription-Medication). 
-
-The opinion_infections and opinion_mortality columns are also a little 'light' in terms of responses and have the same number of responses.  This null rate of ~16% was imputed with the median values for each respective field. 
-
-Null values in columns that contain <5% null values were dropped.  
-
-Other than those outlined above, there doesn't seem to be be any other apparent patterns for incomplete data. (See above).
-
 
 ## Main Dataset:
 
 **Columns dropped:**
  These columns were dropped in prior processing:
->* **Date** While the date the data was collected could have a bearing on whether or not someone tested postivie, it would not provide insight to biological, behavioral or geographical indicators.
+* **Date** While the date the data was collected could have a bearing on whether or not someone tested postivie, it would not provide insight to biological, behavioral or geographical indicators.
 * **Region** This was a feature that substantially lacked data in the inital collection with 93% of the values missing.
 
 In addition the following columns were dropped with rationale below:
->* **ip_accuracy** - This feature measures the accuracy of the IP location and is used in the data collection process rather than for predicting a medical condition.
+* **ip_accuracy** - This feature measures the accuracy of the IP location and is used in the data collection process rather than for predicting a medical condition.
 * **risk_infection** - This is a value calculated post-hoc, based on the data collected from this dataset
 * **risk_mortality** - This is a value calculated post-hoc, based on the data collected from this dataset
 * **prescription_medication** - This column contains text-strings and has over 57K values. A column was added called **taking_prescription_medication** to capture if an individual is taking prescribed medicine.  It's proposed to deal with this column separately if it's indicated to be a factor separately since this is computationally expensive.
@@ -182,7 +133,6 @@ from sklearn.model_selection import train_test_split
 ```python
 y = df2['covid19_positive'].copy()
 X = df2.drop('covid19_positive', axis=1).copy()
-
 ```
 
 ```python
@@ -193,80 +143,9 @@ y.value_counts()
     1       791
     Name: covid19_positive, dtype: int64
 
-
-
-
 ```python
 X_train, X_test, y_train, y_test = train_test_split(X,y, test_size=.25, stratify=y, random_state=123)
 ```
-
-
-```python
-len(X_test)
-```
-
-
-
-
-    143803
-
-
-
-
-```python
-len(y_test)
-```
-
-
-
-
-    143803
-
-
-
-
-```python
-len(y_train)
-```
-
-
-
-
-    431407
-
-
-
-
-```python
-len(X_train)
-```
-
-
-
-
-    431407
-
-
-
-
-```python
-print(df['covid19_positive'].value_counts(normalize=True))
-coviddf= pd.DataFrame(df['covid19_positive'].value_counts(normalize=True)*100)
-coviddf.plot(kind='bar', color='r')
-plt.title('Covid19 Positive Rates')
-
-```
-
-    0    0.998625
-    1    0.001375
-    Name: covid19_positive, dtype: float64
-    
-
-
-
-
-    Text(0.5, 1.0, 'Covid19 Positive Rates')
-
 
 ### Inspecting training set  for imbalance 
 
@@ -275,22 +154,13 @@ plt.title('Covid19 Positive Rates')
 y_train.value_counts()
 ```
 
-
-
-
     0    430814
     1       593
     Name: covid19_positive, dtype: int64
 
-
-
-
 ```python
 y_test.value_counts()
 ```
-
-
-
 
     0    143605
     1       198
@@ -300,20 +170,9 @@ y_test.value_counts()
 
 ## Modeling:  
 
-First Attempt: **Using 'vanilla' Decision Tree and SMOTE to address imbalances**
-
 Several attempts were made implementing different attempts to deal with the extreme imbalance since the tartget class was also the minority class. Testing demonstrated that tuning the model's weight class returned increased performance over random oversampling or undersampling.  Various models were tested including Decision Tree, Random Forest and XGBoost.  When GridSearch was applied, modeling performed poorly when compared to manual tuning.  In some cases, the size of the dataset  proved to be too computationally expensive to implement GridSearch and testing began to run over 20 hours.  Because manual tuning proved to be more efficient, GridSearch was abandoned.  The final iteration was a manually tuned random forsest classifier with >90% accuracy and >64% recall.
 
-
-
-
-
-
 ## BEST MODEL: Manually tuned Random Forest
-
-
-
-
 
 ```python
 time = fn.Timer()
@@ -323,18 +182,14 @@ rf_clf8.fit(X_train, y_train)
 time.stop()
 ```
 
-
 ```python
 yh8=rf_clf8.predict(X_test)
 ```
-
-
 ```python
 mean_rf_cv_score = np.mean(cross_val_score(rf_clf8, X_train, y_train, cv=3))
 
 print(f"Mean Cross Validation Score for Random Forest Classifier: {mean_rf_cv_score :.2%}")
 ```
-
 
 ```python
 fn.evaluate_model(X_test, y_test, yh8, X_train, y_train, rf_clf8)
@@ -348,12 +203,9 @@ The area under the curve demonstrates the reliability of the model is 87.1% whic
 
 The most important factors are listed below:
 
-
-
 ```python
 fn.df_import(rf_clf8,X_train,n=10)
 ```
-
 
 ```python
 fn.plot_importance(rf_clf8,X_train)
