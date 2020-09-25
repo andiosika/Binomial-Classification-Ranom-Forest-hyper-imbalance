@@ -76,10 +76,6 @@ df_cor = pd.DataFrame(df.corr()['covid19_positive'].sort_values(ascending=False)
 df_cor
 ```
 
-```python
-df.corr()['covid19_positive'].sort_values(ascending=False).plot(kind='barh', figsize=(12,12))
-```
-
 ### Raw Data Inspection Observations: 
 
 A quick look revealed that were no direct correlations and the most highly correlated features of the unprocessed data are: 
