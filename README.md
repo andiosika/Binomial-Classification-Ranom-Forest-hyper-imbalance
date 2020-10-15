@@ -99,7 +99,7 @@ height | 0.006999
 ## Main Dataset:
 
 **Columns dropped:**
- These columns were dropped in prior processing:
+ Seven features of the original 43 were dropped in prior processing, rationale is below:
 * **Date** While the date the data was collected could have a bearing on whether or not someone tested postivie, it would not provide insight to biological, behavioral or geographical indicators.
 * **Region** This was a feature that substantially lacked data in the inital collection with 93% of the values missing.
 
