@@ -156,7 +156,9 @@ y_test.value_counts()
 
 ## Modeling:  
 
-Several attempts were made implementing different attempts to deal with the extreme imbalance since the tartget class was also the minority class. Testing demonstrated that tuning the model's weight class returned increased performance over random oversampling or undersampling.  Various models were tested including Decision Tree, Random Forest and XGBoost.  When GridSearch was applied, modeling performed poorly when compared to manual tuning.  In some cases, the size of the dataset  proved to be too computationally expensive to implement GridSearch and testing began to run over 20 hours.  Because manual tuning proved to be more efficient, GridSearch was abandoned.  The final iteration was a manually tuned random forsest classifier with >90% accuracy and >64% recall.
+A baseline model using a basic decision tree was implemented with SMOTING data to address the class imbalance.  While accuracy for this model was 99% - it proved to be overtrained with recall rates for true negatives as well at .99 due to the large amout of data supporting this. Most importantly, recall for the target (covid positive) was .07 and this was the class we were most interested in predicting.
+
+Several attempts were made implementing different attempts to deal with the extreme imbalance since the tartget class was also the minority class. Testing demonstrated that tuning the model's weight class returned increased performance over random oversampling or undersampling.  Various models were tested including Decision Tree, Random Forest and XGBoost.  When GridSearch was applied, modeling performed poorly when compared to manual tuning.  In some cases, the size of the dataset  proved to be too computationally expensive to implement GridSearch and testing began to run over 20 hours.  Because manual tuning proved to be more efficient, GridSearch was abandoned.  The final iteration was a manually tuned random forsest classifier with >90% accuracy and >64% recall or a improvement of **57% increase in recall** from the baseline.
 
 ## BEST MODEL: Manually tuned Random Forest
 
