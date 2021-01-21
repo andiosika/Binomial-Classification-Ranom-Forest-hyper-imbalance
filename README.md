@@ -6,7 +6,7 @@ The final iteration is a manually tuned random forsest classifier with >95% accu
 
 **Main Files:** 
 
-* student.ipynb - Code, details and visualizations 
+* workflow.ipynb - Code, details and visualizations 
 * Covid19Preso.pptx - A non-technical presentation with findings
 
 
