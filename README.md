@@ -2,15 +2,16 @@
 
 Using binomial classification to predict COVID-19 infection on a large dataset (>618K samples) with extreme imbalance and minority class (.13% of samples) as target. 
 
-The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall that uses biological, behavioral and environmental data collected to predict those who would test postive for COVID-19. Alternative methods were trialed using a Decision Tree and XGBoost, but Random Forest showed best baseline results.
+The final iteration is a manually tuned random forsest classifier with >95% accuracy and >64% recall that uses biological, behavioral and environmental data collected to predict those who would test postive for COVID-19. 
 
 **Main Files:** 
 
-* student.ipynb - Code, details and visualizations 
+* workflow.ipynb - Code, details and visualizations 
 * Covid19Preso.pptx - A non-technical presentation with findings
 
 
-* Blog post URL: https://andiosika.github.io/imbalanced_data
+* Blog post URL: https://andiosika.github.io/imbalanced_data 
+               : https://andiosika.wixsite.com/mysite/post/a-visit-to-a-random-forest
 
 
 ## Project Sections Within Main student.ipynb File:
