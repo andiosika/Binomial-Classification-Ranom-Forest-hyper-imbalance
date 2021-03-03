@@ -65,7 +65,7 @@ This is an approximate ratio of 1:700
 
 ## The dataset:
 
-Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset selection and develop a strategy to manage preprocessing of a set this size.  You can see the 43 features in the image below, as well as how complete the data collection was for each.
+Because of the size of this dataset, pandas profiling was used to inform potential considerations for dataset feature selection and develop a strategy to manage preprocessing of a set this size.  You can see the 43 features in the image below, as well as how complete the data collection was for each.
 
 ![GitHub Logo](/imgs/output_30_1.png)
 
